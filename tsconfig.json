@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@dashboard/*": [
+        "./apps/dashboard/*"
+      ],
+      "@five_by_five/*": [
+        "./apps/five_by_five/*"
+      ],
+      "@app/executer": [
+        "libs/executer/src"
+      ],
+      "@app/executer/*": [
+        "libs/executer/src/*"
+      ],
+      "@app/db": [
+        "libs/db/src"
+      ],
+      "@app/db/*": [
+        "libs/db/src/*"
+      ]
+    }
+  }
+}

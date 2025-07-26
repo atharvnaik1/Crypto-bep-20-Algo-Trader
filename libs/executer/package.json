@@ -1,0 +1,7 @@
+{
+    "name": "executer",
+    "dependencies": {
+        "@nestjs/common": "^10.0.0",
+        "ethers": "^6.11.1"
+    }
+}

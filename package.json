@@ -1,0 +1,11 @@
+{
+  "name": "trading-automation",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "build": "pnpm run --parallel build",
+    "start": "pnpm run --parallel start",
+    "db:generate": "npx prisma generate --schema=libs/db/prisma/schema.prisma"
+  },
+  "license": "ISC"
+}

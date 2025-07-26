@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Strategy {
+  id            String     @id @default(uuid())
+  name          String     @unique
+  description   String
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  walletAddress String
+  wallet        Wallet[]
+  trades        Trade[]
+  snapshots     Snapshot[]
+
+  @@map("strategies")
+}
+
+model Wallet {
+  address    String     @id
+  name       String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  strategy   Strategy   @relation(fields: [strategyId], references: [id])
+  strategyId String
+  trades     Trade[]
+  snapshots  Snapshot[]
+
+  @@map("wallets")
+}
+
+model Trade {
+  id               String   @id @default(uuid())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  strategy         Strategy @relation(fields: [strategyId], references: [id])
+  strategyId       String
+  wallet           Wallet   @relation(fields: [walletAddress], references: [address])
+  walletAddress    String
+  fromAmount       String
+  fromToken        Token    @relation("FromTrades", fields: [fromTokenAddress, chainId], references: [address, chainId])
+  fromTokenAddress String
+  toToken          Token    @relation("ToTrades", fields: [toTokenAddress, chainId], references: [address, chainId])
+  toTokenAddress   String
+  chainId          Int
+  txHash           String
+  toAmount         String?
+  metadata         Json
+
+  @@map("trades")
+}
+
+model Token {
+  address     String
+  chainId     Int
+  name        String
+  symbol      String
+  decimals    Int
+  logoURI     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  fromTrades  Trade[]  @relation("FromTrades")
+  toTrades    Trade[]  @relation("ToTrades")
+  coingeckoId String
+
+  @@id([address, chainId])
+  @@map("tokens")
+}
+
+// models for strategy performance
+
+model Snapshot {
+  id            String            @id @default(uuid())
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  strategy      Strategy          @relation(fields: [strategyId], references: [id])
+  strategyId    String
+  wallet        Wallet            @relation(fields: [walletAddress], references: [address])
+  walletAddress String
+  totalValue    Float
+  balances      BalanceSnapshot[]
+
+  @@map("snapshots")
+}
+
+// store the balance of a wallet at a specific time
+model BalanceSnapshot {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  snapshot     Snapshot @relation(fields: [snapshotId], references: [id])
+  snapshotId   String
+  tokenAddress String
+  tokenChainId Int
+  balance      String
+  value        Float
+
+  @@map("balance_snapshots")
+}

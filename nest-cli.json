@@ -1,0 +1,25 @@
+{
+  "projects": {
+    "executer": {
+      "type": "library",
+      "root": "libs/executer",
+      "entryFile": "index",
+      "sourceRoot": "libs/executer/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/executer/tsconfig.lib.json"
+      }
+    },
+    "db": {
+      "type": "library",
+      "root": "libs/db",
+      "entryFile": "index",
+      "sourceRoot": "libs/db/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/db/tsconfig.lib.json"
+      }
+    }
+  },
+  "compilerOptions": {
+    "webpack": true
+  }
+}
