@@ -1,6 +1,6 @@
 tech stack :: Ethereum Erc-20/ bep-20 RPC-56, next.js, react.js, oneinch api integration, metamask wallet public key, postgresql, nest.js.
 # Trading Automation
-[![Ethereum Trading Bot](./Ethereum%20Trading%20bot.png)](./Ethereum%20Trading%20bot.png)
+[![Ethereum Trading Bot](./Ethereum%20Trading%20bot1.png)](./Ethereum%20Trading%20bot1.png)
 ## Description
 
 Automated trading on Decentralized Exchanges (DEX) based on the defined strategies.
