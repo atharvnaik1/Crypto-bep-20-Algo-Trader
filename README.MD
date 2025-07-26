@@ -1,4 +1,4 @@
-
+tech stack :: Ethereum Erc-20/ bep-20 RPC-56, next.js, react.js, oneinch api integration, metamask wallet public key, postgresql, nest.js.
 # Trading Automation
 
 ## Description
